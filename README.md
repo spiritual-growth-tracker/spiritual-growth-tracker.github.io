@@ -46,7 +46,7 @@ A web application to help users track their daily spiritual growth by monitoring
 
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
+   git clone git@github.com:spiritualgrowthtracker/spiritual-growth-tracker.github.io.git
    cd spiritual-growth-tracker
    ```
 
@@ -88,7 +88,7 @@ The project is automatically deployed to GitHub Pages when changes are pushed to
 
 1. Builds the project with production optimizations
 2. Deploys the built files to the `gh-pages` branch
-3. Makes the site available at `https://[username].github.io/spiritual-growth-tracker/`
+3. Makes the site available at `https://github.com/spiritualgrowthtracker/spiritual-growth-tracker.github.io`
 
 To manually trigger a deployment:
 1. Go to the "Actions" tab in your GitHub repository
