@@ -1,0 +1,48 @@
+{
+  "name": "spiritual-growth-tracker",
+  "version": "1.0.0",
+  "description": "A Progressive Web Application to track spiritual growth",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run clean && webpack serve --mode development",
+    "build": "npm run clean && webpack --mode production",
+    "clean": "rimraf dist"
+  },
+  "keywords": [
+    "spiritual",
+    "growth",
+    "tracker",
+    "pwa",
+    "bootstrap",
+    "chart.js"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.6",
+    "bootstrap-icons": "^1.13.1",
+    "chart.js": "^4.4.0",
+    "flatpickr": "^4.6.13",
+    "jquery": "^3.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "autoprefixer": "^10.4.17",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^6.0.0",
+    "html-loader": "^5.0.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss": "^8.4.35",
+    "postcss-loader": "^8.1.0",
+    "rimraf": "^5.0.1",
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
