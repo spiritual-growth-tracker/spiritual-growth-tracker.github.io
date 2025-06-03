@@ -110,7 +110,16 @@ module.exports = (env, argv) => {
                     use: [
                         MiniCssExtractPlugin.loader,
                         'css-loader',
-                        'postcss-loader'
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        require('autoprefixer')
+                                    ]
+                                }
+                            }
+                        }
                     ]
                 },
                 {
@@ -137,24 +146,32 @@ module.exports = (env, argv) => {
             }),
             new CopyWebpackPlugin({
                 patterns: [
-                  {
-                    from: imagesDir,
-                    to: path.resolve(__dirname, 'dist/assets/images'),
-                    globOptions: {
-                        ignore: ['**/.DS_Store']
+                    {
+                        from: imagesDir,
+                        to: path.resolve(__dirname, 'dist/assets/images'),
+                        globOptions: {
+                            ignore: ['**/.DS_Store']
+                        },
+                        noErrorOnMissing: true
                     },
-                    noErrorOnMissing: true
-                  },
-                  {
-                    from: path.resolve(__dirname, 'manifest.json'),
-                    to: path.resolve(__dirname, 'dist/manifest.json'),
-                    noErrorOnMissing: true
-                  },
-                  {
-                    from: path.resolve(__dirname, 'index.html'),
-                    to: path.resolve(__dirname, 'dist/index.html'),
-                    noErrorOnMissing: true
-                  }
+                    {
+                        from: path.resolve(__dirname, 'manifest.json'),
+                        to: path.resolve(__dirname, 'dist/manifest.json'),
+                        noErrorOnMissing: true
+                    },
+                    {
+                        from: path.resolve(__dirname, 'index.html'),
+                        to: path.resolve(__dirname, 'dist/index.html'),
+                        noErrorOnMissing: true
+                    },
+                    {
+                        from: path.resolve(__dirname, 'node_modules/bootstrap-icons/font'),
+                        to: path.resolve(__dirname, 'dist/assets/fonts'),
+                        globOptions: {
+                            ignore: ['**/.DS_Store']
+                        },
+                        noErrorOnMissing: true
+                    }
                 ]
             })
         ],
