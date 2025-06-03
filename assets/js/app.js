@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as bootstrap from 'bootstrap';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import '../css/bootstrap-icons.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import Chart from 'chart.js/auto';
 import '../css/app.css';
 

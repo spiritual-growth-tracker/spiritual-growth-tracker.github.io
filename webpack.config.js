@@ -163,14 +163,6 @@ module.exports = (env, argv) => {
                         from: path.resolve(__dirname, 'index.html'),
                         to: path.resolve(__dirname, 'dist/index.html'),
                         noErrorOnMissing: true
-                    },
-                    {
-                        from: path.resolve(__dirname, 'node_modules/bootstrap-icons/font'),
-                        to: path.resolve(__dirname, 'dist/assets/fonts/bootstrap-icons'),
-                        globOptions: {
-                            ignore: ['**/.DS_Store']
-                        },
-                        noErrorOnMissing: true
                     }
                 ]
             })
