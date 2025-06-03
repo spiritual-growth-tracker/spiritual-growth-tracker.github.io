@@ -22,7 +22,7 @@ const directoryExists = (dirPath) => {
 
 module.exports = (env, argv) => {
     const isProduction = argv.mode === 'production';
-    const publicPath = isGitHubPages ? '/dailyinventory.github.io/' : '/';
+    const publicPath = isGitHubPages ? '/spiritual-growth-tracker.github.io/' : '/';
     const imagesDir = path.resolve(__dirname, 'assets/images');
 
     return {
