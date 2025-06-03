@@ -166,7 +166,7 @@ module.exports = (env, argv) => {
                     },
                     {
                         from: path.resolve(__dirname, 'node_modules/bootstrap-icons/font'),
-                        to: path.resolve(__dirname, 'dist/assets/fonts'),
+                        to: path.resolve(__dirname, 'dist/assets/fonts/bootstrap-icons'),
                         globOptions: {
                             ignore: ['**/.DS_Store']
                         },
