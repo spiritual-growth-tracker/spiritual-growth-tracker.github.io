@@ -167,7 +167,10 @@ module.exports = (env, argv) => {
                     {
                         from: path.resolve(__dirname, 'index.html'),
                         to: path.resolve(__dirname, 'dist/index.html'),
-                        noErrorOnMissing: true
+                        noErrorOnMissing: true,
+                        transform(content) {
+                            return content; // Return content as-is without any processing
+                        }
                     }
                 ]
             })
