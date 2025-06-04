@@ -601,6 +601,31 @@ const setupModalHandlers = () => {
     }
 };
 
+// Export data functionality
+const exportData = () => {
+    // Get all data from localStorage
+    const data = {};
+    Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('data_')) {
+            data[key] = JSON.parse(localStorage.getItem(key));
+        }
+    });
+
+    // Create a JSON string
+    const jsonString = JSON.stringify(data, null, 2);
+
+    // Create a blob and download link
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `spiritual-growth-tracker-data-${formatDate(new Date())}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing app...');
@@ -608,8 +633,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFormHandlers();
     setupModalHandlers();
     initializeCharts();
+
+    // Add export button handler
+    const exportDataBtn = document.getElementById('exportDataBtn');
+    if (exportDataBtn) {
+        exportDataBtn.addEventListener('click', exportData);
+    }
+
     console.log('App initialization complete');
-}); 
+});
 
 // Prevent zoom but allow scrolling, excluding canvas elements
 function shouldPreventZoom(e) {

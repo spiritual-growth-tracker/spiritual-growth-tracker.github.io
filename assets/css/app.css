@@ -658,3 +658,65 @@ canvas {
         font-size: 1.25rem;
     }
 }
+
+.hover-opacity-100:hover {
+    opacity: 1 !important;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.section-title .btn-link {
+    transition: transform 0.2s ease-in-out;
+}
+
+.section-title .btn-link:hover {
+    transform: scale(1.1);
+}
+
+/* Graph Button Styles */
+.btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+
+.btn-success:active,
+.btn-success:focus {
+    background-color: #45a049 !important;
+    border-color: #45a049 !important;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25) !important;
+}
+
+.btn-success .bi-bar-chart-fill {
+    color: white;
+}
+
+/* Export Button Styles */
+.btn-info {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-info:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn-info:active,
+.btn-info:focus {
+    background-color: #5a6268 !important;
+    border-color: #545b62 !important;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25) !important;
+}
+
+.btn-info .bi-download {
+    color: white;
+}
