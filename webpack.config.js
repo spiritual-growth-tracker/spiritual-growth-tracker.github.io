@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 const fs = require('fs');
+const gitRevSync = require('git-rev-sync');
 
 // Check if we're building for GitHub Pages
 const isGitHubPages = process.env.GITHUB_PAGES === 'true';
@@ -169,7 +170,8 @@ module.exports = (env, argv) => {
                         to: path.resolve(__dirname, 'dist/index.html'),
                         noErrorOnMissing: true,
                         transform(content) {
-                            return content; // Return content as-is without any processing
+                            const commitId = gitRevSync.short();
+                            return content.toString().replace('</body>', `<div style="text-align: center; padding: 10px; font-size: 12px; color: #666;">Build: ${commitId}</div></body>`);
                         }
                     }
                 ]
