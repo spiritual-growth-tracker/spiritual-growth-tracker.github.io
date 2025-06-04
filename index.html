@@ -45,7 +45,12 @@
             </div>
 
             <div class="fruit-section">
-                <h2 class="section-title">Fruits of the Spirit</h2>
+                <h2 class="section-title d-flex align-items-center justify-content-between">
+                    <div class="flex-grow-1 text-center">Fruits of the Spirit</div>
+                    <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#fruitsDefinitionsModal">
+                        <i class="bi bi-question-circle-fill text-dark opacity-75 hover-opacity-100"></i>
+                    </button>
+                </h2>
                 <p class="text-center mb-4">In what ways did you operate in the Spirit today? Click on each fruit that was evident in your life.</p>
                 <div class="table-container">
                     <table class="clickable-table">
@@ -69,7 +74,12 @@
             </div>
 
             <div class="flesh-section">
-                <h2 class="section-title">Works of the Flesh</h2>
+                <h2 class="section-title d-flex align-items-center justify-content-between">
+                    <div class="flex-grow-1 text-center">Works of the Flesh</div>
+                    <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#fleshDefinitionsModal">
+                        <i class="bi bi-question-circle-fill text-dark opacity-75 hover-opacity-100"></i>
+                    </button>
+                </h2>
                 <p class="text-center mb-4">In what ways did you operate in the flesh today? Click on each work that was evident in your life.</p>
                 <div class="table-container">
                     <table class="clickable-table">
@@ -118,8 +128,11 @@
             </div>
 
             <div class="text-center mt-4">
-                <button type="button" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#resultsModal">
+                <button type="button" class="btn btn-success btn-lg me-2" data-bs-toggle="modal" data-bs-target="#resultsModal">
                     <i class="bi bi-bar-chart-fill"></i>
+                </button>
+                <button type="button" class="btn btn-info btn-lg me-2" id="exportDataBtn">
+                    <i class="bi bi-download"></i>
                 </button>
                 <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#settingsModal">
                     <i class="bi bi-gear-fill"></i>
@@ -276,6 +289,164 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-danger" id="confirmResetBtn">Reset Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fruits of the Spirit Definitions Modal -->
+        <div class="modal fade" id="fruitsDefinitionsModal" tabindex="-1" aria-labelledby="fruitsDefinitionsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fruitsDefinitionsModalLabel">Biblical Definitions of the Fruits of the Spirit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Love (ἀγάπη - agape)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> A selfless, sacrificial love that seeks the best for others without expecting anything in return.</p>
+                                <p class="mb-0">"Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs." - 1 Corinthians 13:4-5</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Joy (χαρά - chara)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> A deep, abiding sense of gladness and delight that comes from God, independent of circumstances.</p>
+                                <p class="mb-0">"The joy of the Lord is your strength." - Nehemiah 8:10</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Peace (εἰρήνη - eirene)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> A state of wholeness, harmony, and tranquility that comes from being in right relationship with God and others.</p>
+                                <p class="mb-0">"Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid." - John 14:27</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Patience (μακροθυμία - makrothumia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> The ability to endure difficult circumstances and people without becoming angry or frustrated.</p>
+                                <p class="mb-0">"Be patient, bearing with one another in love." - Ephesians 4:2</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Kindness (χρηστότης - chrestotes)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> A tender, compassionate attitude that leads to helpful actions toward others.</p>
+                                <p class="mb-0">"Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you." - Ephesians 4:32</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Goodness (ἀγαθωσύνη - agathosune)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Moral excellence and virtue that manifests in righteous actions and pure motives.</p>
+                                <p class="mb-0">"Surely your goodness and love will follow me all the days of my life." - Psalm 23:6</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Faithfulness (πίστις - pistis)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Steadfast loyalty, reliability, and trustworthiness in relationships and commitments.</p>
+                                <p class="mb-0">"Let love and faithfulness never leave you; bind them around your neck, write them on the tablet of your heart." - Proverbs 3:3</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Gentleness (πραΰτης - prautes)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Strength under control, characterized by humility, meekness, and consideration for others.</p>
+                                <p class="mb-0">"Take my yoke upon you and learn from me, for I am gentle and humble in heart, and you will find rest for your souls." - Matthew 11:29</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Self-control (ἐγκράτεια - egkrateia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> The ability to master one's desires, emotions, and actions through the power of the Holy Spirit.</p>
+                                <p class="mb-0">"Like a city whose walls are broken through is a person who lacks self-control." - Proverbs 25:28</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Works of the Flesh Definitions Modal -->
+        <div class="modal fade" id="fleshDefinitionsModal" tabindex="-1" aria-labelledby="fleshDefinitionsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fleshDefinitionsModalLabel">Biblical Definitions of the Works of the Flesh</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Sexual Immorality (πορνεία - porneia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Any form of sexual activity outside of God's design for marriage between one man and one woman.</p>
+                                <p class="mb-0">"Flee from sexual immorality. All other sins a person commits are outside the body, but whoever sins sexually, sins against their own body." - 1 Corinthians 6:18</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Impurity (ἀκαθαρσία - akatharsia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Moral uncleanness and corruption that affects thoughts, words, and actions.</p>
+                                <p class="mb-0">"But among you there must not be even a hint of sexual immorality, or of any kind of impurity." - Ephesians 5:3</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Sensuality (ἀσέλγεια - aselgeia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Unrestrained indulgence in physical pleasures and lustful desires.</p>
+                                <p class="mb-0">"They have eyes full of adultery, insatiable for sin. They entice unsteady souls. They have hearts trained in greed." - 2 Peter 2:14</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Idolatry (εἰδωλολατρία - eidololatria)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Worshiping or giving ultimate value to anything other than God.</p>
+                                <p class="mb-0">"Therefore, my dear friends, flee from idolatry." - 1 Corinthians 10:14</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Sorcery (φαρμακεία - pharmakeia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> The use of drugs, magic, or occult practices to manipulate spiritual forces.</p>
+                                <p class="mb-0">"The acts of the flesh are obvious: sexual immorality, impurity and debauchery; idolatry and witchcraft." - Galatians 5:19-20</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Enmity (ἔχθρα - echthra)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Hostility and hatred toward others, often leading to conflict and division.</p>
+                                <p class="mb-0">"For the mind set on the flesh is hostile to God." - Romans 8:7</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Strife (ἔρις - eris)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Quarreling, contention, and rivalry that disrupts relationships and unity.</p>
+                                <p class="mb-0">"For where you have envy and selfish ambition, there you find disorder and every evil practice." - James 3:16</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Jealousy (ζῆλος - zelos)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Resentment and envy of others' possessions, qualities, or achievements.</p>
+                                <p class="mb-0">"For where you have envy and selfish ambition, there you find disorder and every evil practice." - James 3:16</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Fits of Anger (θυμός - thumos)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Sudden, intense outbursts of rage and wrath that harm relationships.</p>
+                                <p class="mb-0">"Refrain from anger and turn from wrath; do not fret—it leads only to evil." - Psalm 37:8</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Rivalries (ἐριθεία - eritheia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Selfish ambition and competition that puts personal interests above others.</p>
+                                <p class="mb-0">"Do nothing out of selfish ambition or vain conceit. Rather, in humility value others above yourselves." - Philippians 2:3</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Dissensions (διχοστασία - dichostasia)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Disagreements and divisions that create factions and break unity.</p>
+                                <p class="mb-0">"I appeal to you, brothers and sisters, in the name of our Lord Jesus Christ, that all of you agree with one another in what you say and that there be no divisions among you." - 1 Corinthians 1:10</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Divisions (αἵρεσις - hairesis)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Forming exclusive groups or sects that cause separation and disunity.</p>
+                                <p class="mb-0">"I urge you, brothers and sisters, to watch out for those who cause divisions and put obstacles in your way." - Romans 16:17</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Envy (φθόνος - phthonos)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Resentment and discontent over others' blessings or success.</p>
+                                <p class="mb-0">"A heart at peace gives life to the body, but envy rots the bones." - Proverbs 14:30</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Drunkenness (μέθη - methe)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Excessive consumption of alcohol leading to impaired judgment and behavior.</p>
+                                <p class="mb-0">"Do not get drunk on wine, which leads to debauchery. Instead, be filled with the Spirit." - Ephesians 5:18</p>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Orgies (κῶμος - komos)</h6>
+                                <p class="mb-2"><strong>Definition:</strong> Wild, excessive partying and revelry that leads to immoral behavior.</p>
+                                <p class="mb-0">"Let us behave decently, as in the daytime, not in carousing and drunkenness, not in sexual immorality and debauchery." - Romans 13:13</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
