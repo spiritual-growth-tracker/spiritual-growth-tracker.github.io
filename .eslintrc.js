@@ -7,7 +7,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -18,7 +17,6 @@ module.exports = {
   },
   plugins: [
     'react',
-    'react-hooks',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',

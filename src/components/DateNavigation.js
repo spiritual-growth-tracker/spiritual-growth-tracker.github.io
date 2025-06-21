@@ -7,7 +7,6 @@ const DateNavigation = ({ selectedDate, onDateChange }) => {
   const [useNativeInput, setUseNativeInput] = useState(false);
 
   const handleDateChange = (selectedDates, dateStr) => {
-    console.log('Date changed:', dateStr);
     onDateChange(dateStr);
   };
 
@@ -28,35 +27,22 @@ const DateNavigation = ({ selectedDate, onDateChange }) => {
   };
 
   useEffect(() => {
-    console.log('DateNavigation mounted, inputRef:', inputRef.current);
-    
     // Try to initialize flatpickr
     const initFlatpickr = async () => {
       try {
         const flatpickr = await import('flatpickr');
-        console.log('Flatpickr imported successfully');
-        
         if (inputRef.current) {
-          console.log('Initializing flatpickr on input');
-          
           flatpickrInstance.current = flatpickr.default(inputRef.current, {
             dateFormat: 'Y-m-d',
             maxDate: 'today',
             clickOpens: true,
             allowInput: false,
             onChange: handleDateChange,
-            onOpen: function(selectedDates, dateStr, instance) {
-              console.log('Flatpickr opened successfully');
-            },
-            onClose: function(selectedDates, dateStr, instance) {
-              console.log('Flatpickr closed');
-            }
+            onOpen: function() {},
+            onClose: function() {}
           });
-          
-          console.log('Flatpickr instance created:', flatpickrInstance.current);
         }
       } catch (error) {
-        console.error('Failed to initialize flatpickr:', error);
         setUseNativeInput(true);
       }
     };
@@ -77,29 +63,6 @@ const DateNavigation = ({ selectedDate, onDateChange }) => {
       flatpickrInstance.current.setDate(selectedDate, false);
     }
   }, [selectedDate, useNativeInput]);
-
-  const handleInputClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (useNativeInput) {
-      console.log('Using native date input');
-      return;
-    }
-    
-    console.log('Input clicked, opening flatpickr...');
-    if (flatpickrInstance.current) {
-      try {
-        flatpickrInstance.current.open();
-      } catch (error) {
-        console.error('Error opening flatpickr:', error);
-        setUseNativeInput(true);
-      }
-    } else {
-      console.log('No flatpickr instance, falling back to native input');
-      setUseNativeInput(true);
-    }
-  };
 
   const handleCalendarIconClick = () => {
     if (flatpickrInstance.current) {
@@ -156,8 +119,6 @@ const DateNavigation = ({ selectedDate, onDateChange }) => {
           <i className="bi bi-chevron-right"></i>
         </button>
       </div>
-      
-      {/* Debug info */}
       <div className="mt-2 text-center">
         <small className="text-muted">
           {useNativeInput ? 'Using native date input' : 'Click the input or calendar icon to open date picker'}

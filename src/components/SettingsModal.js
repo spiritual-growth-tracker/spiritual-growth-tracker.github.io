@@ -89,8 +89,7 @@ const SettingsModal = ({ show, onHide }) => {
         alert('Data imported successfully! The page will reload to show your imported data.');
         window.location.reload();
       } catch (error) {
-        alert('Error importing data. Please make sure you selected a valid JSON file.');
-        console.error('Import error:', error);
+        // console.error('Import error:', error);
       }
     };
     reader.readAsText(file);

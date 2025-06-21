@@ -9,7 +9,7 @@ import FleshSection from './components/FleshSection';
 import ResultsModal from './components/ResultsModal';
 import SettingsModal from './components/SettingsModal';
 import InstallPWAModal from './components/InstallPWAModal';
-import { formatDate, parseDate, isToday } from './utils/dateUtils';
+import { formatDate } from './utils/dateUtils';
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(formatDate(new Date()));

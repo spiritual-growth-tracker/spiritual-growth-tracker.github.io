@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -29,7 +29,6 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
   const loadAllData = () => {
     const allFruits = [];
     const allFlesh = [];
-    
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key.startsWith('data_')) {
@@ -38,25 +37,20 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
         allFlesh.push(...data.flesh);
       }
     }
-    
     setAllData({ fruits: allFruits, flesh: allFlesh });
   };
 
-  const createChartData = (fruits, flesh, title) => {
+  const createChartData = (fruits, flesh) => {
     const fruitCounts = {};
     const fleshCounts = {};
-
     fruits.forEach(fruit => {
       fruitCounts[fruit] = (fruitCounts[fruit] || 0) + 1;
     });
-
     flesh.forEach(work => {
       fleshCounts[work] = (fleshCounts[work] || 0) + 1;
     });
-
     const fruitLabels = Object.keys(fruitCounts);
     const fleshLabels = Object.keys(fleshCounts);
-
     return {
       fruits: {
         labels: fruitLabels,
@@ -86,8 +80,8 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
     };
   };
 
-  const currentChartData = createChartData(currentData.fruits, currentData.flesh, 'Current Date');
-  const allChartData = createChartData(allData.fruits, allData.flesh, 'All Time');
+  const currentChartData = createChartData(currentData.fruits, currentData.flesh);
+  const allChartData = createChartData(allData.fruits, allData.flesh);
 
   return (
     <Modal show={show} onHide={onHide} size="lg">
@@ -113,7 +107,6 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
             </button>
           </li>
         </ul>
-        
         <div className="tab-content">
           <div className={`tab-pane fade ${activeTab === 'current-date' ? 'show active' : ''}`}>
             <div className="row">
@@ -153,7 +146,6 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
               </div>
             </div>
           </div>
-          
           <div className={`tab-pane fade ${activeTab === 'all-dates' ? 'show active' : ''}`}>
             <div className="row">
               <div className="col-md-6">
