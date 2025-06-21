@@ -1,140 +1,106 @@
 # Spiritual Growth Tracker
 
-A Progressive Web Application (PWA) designed to help users track their daily spiritual growth by monitoring their progress in the Fruits of the Spirit and identifying areas where they might be walking in the Works of the Flesh.
+A React-based Progressive Web Application to track your daily spiritual growth by monitoring how well you are operating in the Fruits of the Spirit and identifying areas where you might be walking in the Works of the Flesh.
 
 ## Features
 
-- Daily tracking of Fruits of the Spirit
-- Monitoring of Works of the Flesh
-- Interactive calendar with date selection
-- Visual progress charts and statistics
-- Responsive design for all devices
-- Progressive Web App (PWA) support
-- Offline functionality
-- Data persistence using local storage
-- Dark/Light mode support
-- Mobile-first design
+- **Daily Tracking**: Record your spiritual growth on a daily basis
+- **Fruits of the Spirit**: Track love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, and self-control
+- **Works of the Flesh**: Monitor areas of struggle including sexual immorality, impurity, sensuality, idolatry, sorcery, enmity, strife, jealousy, fits of anger, rivalries, dissensions, divisions, envy, drunkenness, and orgies
+- **Data Visualization**: View charts and statistics of your spiritual journey
+- **Data Export**: Export your data for backup or analysis
+- **PWA Support**: Install as a native app on your device
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
 
-## Tech Stack
+## Technology Stack
 
-- **Frontend:**
-  - HTML5
-  - CSS3 (with PostCSS for optimization)
-  - JavaScript (ES6+)
-  - Bootstrap 5
-  - Chart.js for data visualization
-  - Flatpickr for date picking
-  - Bootstrap Icons
-
-- **Build Tools:**
-  - Webpack 5
-  - PostCSS
-  - CSS Nano
-  - Terser
-  - Babel
+- **React 18**: Modern React with hooks and functional components
+- **Bootstrap 5**: UI framework for responsive design
+- **Bootstrap Icons**: Icon library
+- **Chart.js**: Data visualization
+- **Flatpickr**: Date picker component
+- **Local Storage**: Data persistence
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- Node.js (version 14 or higher)
+- npm or yarn
 
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/spiritualgrowthtracker/spiritual-growth-tracker.github.io.git
-   cd spiritual-growth-tracker.github.io
-   ```
+```bash
+git clone https://github.com/your-username/spiritual-growth-tracker.github.io.git
+cd spiritual-growth-tracker.github.io
+```
 
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 3. Start the development server:
-   ```bash
-   npm start
-   ```
-
-4. Open your browser and visit:
-   ```
-   http://localhost:8080
-   ```
-
-### Development
-
-- Watch mode for development:
-  ```bash
-  npm start
-  ```
-
-- Production build:
-  ```bash
-  npm run build
-  ```
-
-- Clean and rebuild:
-  ```bash
-  npm run clean:build
-  ```
-
-## Project Structure
-
-```
-spiritual-growth-tracker/
-├── assets/
-│   ├── css/
-│   │   ├── app.css
-│   │   └── bootstrap-icons.css
-│   ├── js/
-│   │   ├── app.js
-│   │   └── vendor.js
-│   ├── images/
-│   │   └── icons/
-├── dist/           # Built files
-├── .github/        # GitHub Actions workflows
-├── webpack.config.js
-├── postcss.config.js
-├── package.json
-└── README.md
+```bash
+npm start
 ```
 
-## Performance Optimizations
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Code splitting for better load times
-- Asset compression and minification
-- Browser caching for static assets
-- Optimized images and fonts
-- CSS optimization with PostCSS
-- JavaScript minification with Terser
-- Tree shaking for unused code
-- Vendor chunk splitting
+### Building for Production
 
-## Browser Support
+To build the app for production:
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Android Chrome)
+```bash
+npm run build
+```
+
+For GitHub Pages deployment:
+
+```bash
+npm run build:github
+```
+
+## Usage
+
+1. **Select a Date**: Use the date picker or navigation buttons to select the date you want to track
+2. **Mark Fruits of the Spirit**: Click on each fruit that was evident in your life that day
+3. **Mark Works of the Flesh**: Click on each work that was evident in your life that day
+4. **View Results**: Click the chart button to see visualizations of your data
+5. **Export Data**: Use the download button to export your data as JSON
+6. **Install as PWA**: Use the install button to add the app to your home screen
+
+## Data Storage
+
+All data is stored locally in your browser's localStorage. This means:
+- Your data stays private and on your device
+- No account or internet connection required
+- Data persists between sessions
+- You can export your data for backup
+
+## PWA Features
+
+This app is a Progressive Web Application, which means:
+- Can be installed on your device like a native app
+- Works offline
+- Receives push notifications (if implemented)
+- Fast loading and responsive
 
 ## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Bootstrap for the UI framework
-- Chart.js for data visualization
-- Flatpickr for the date picker
-- Bootstrap Icons for the icon set 
+- Based on Galatians 5:22-23 (Fruits of the Spirit) and Galatians 5:19-21 (Works of the Flesh)
+- Built with modern web technologies for optimal user experience
+- Designed to help users grow spiritually through daily reflection and tracking 
