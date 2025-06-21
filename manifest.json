@@ -6,6 +6,10 @@
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#4CAF50",
+    "permissions": [
+        "notifications",
+        "background-sync"
+    ],
     "icons": [
         {
             "src": "assets/images/favicons/favicon-192x192.png",

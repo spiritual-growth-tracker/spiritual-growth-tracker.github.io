@@ -2,6 +2,8 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
+    serviceworker: true,
   },
   extends: [
     'eslint:recommended',
@@ -28,4 +30,13 @@ module.exports = {
       version: 'detect',
     },
   },
+  ignorePatterns: [
+    'dist/', 
+    'build/', 
+    'node_modules/', 
+    '*.min.js',
+    'src/assets/js/app.js',
+    'generate-favicons.js',
+    'public/sw.js'
+  ],
 }; 

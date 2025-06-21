@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { formatHumanReadableDate } from '../utils/dateUtils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -10,21 +11,14 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
   const [currentData, setCurrentData] = useState({ fruits: [], flesh: [] });
   const [allData, setAllData] = useState({ fruits: [], flesh: [] });
 
-  useEffect(() => {
-    if (show) {
-      loadCurrentData();
-      loadAllData();
-    }
-  }, [show, selectedDate]);
-
-  const loadCurrentData = () => {
+  const loadCurrentData = useCallback(() => {
     const data = localStorage.getItem(`data_${selectedDate}`);
     if (data) {
       setCurrentData(JSON.parse(data));
     } else {
       setCurrentData({ fruits: [], flesh: [] });
     }
-  };
+  }, [selectedDate]);
 
   const loadAllData = () => {
     const allFruits = [];
@@ -39,6 +33,13 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
     }
     setAllData({ fruits: allFruits, flesh: allFlesh });
   };
+
+  useEffect(() => {
+    if (show) {
+      loadCurrentData();
+      loadAllData();
+    }
+  }, [show, loadCurrentData]);
 
   const createChartData = (fruits, flesh) => {
     const fruitCounts = {};
@@ -86,6 +87,14 @@ const ResultsModal = ({ show, onHide, selectedDate }) => {
   return (
     <Modal show={show} onHide={onHide} size="lg">
       <Modal.Header closeButton>
+        <Modal.Title>
+          Daily Spiritual Inventory Results
+          {activeTab === 'current-date' && (
+            <div className="text-muted fs-6 mt-1">
+              {formatHumanReadableDate(selectedDate)}
+            </div>
+          )}
+        </Modal.Title>
         <Modal.Title>Daily Spiritual Inventory Results</Modal.Title>
       </Modal.Header>
       <Modal.Body>

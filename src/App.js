@@ -9,7 +9,9 @@ import FleshSection from './components/FleshSection';
 import ResultsModal from './components/ResultsModal';
 import SettingsModal from './components/SettingsModal';
 import InstallPWAModal from './components/InstallPWAModal';
+import WelcomeModal from './components/WelcomeModal';
 import { formatDate } from './utils/dateUtils';
+import notificationService from './utils/notificationService';
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(formatDate(new Date()));
@@ -17,6 +19,7 @@ function App() {
   const [showResultsModal, setShowResultsModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [buildVersion, setBuildVersion] = useState('');
 
   // Load data for the selected date
@@ -29,23 +32,39 @@ function App() {
     }
   }, [selectedDate]);
 
-  // Get build version from environment variable or git
+  // Get build version from environment variable
   useEffect(() => {
     // Check if we have a build version from environment (set during build)
-    const envVersion = process.env.REACT_APP_BUILD_VERSION;
+    const envVersion = process.env.REACT_APP_BUILD_VERSION || process.env.GIT_COMMIT_HASH;
     if (envVersion) {
       setBuildVersion(envVersion);
     } else {
-      // Fallback: try to get git commit hash
-      try {
-        const { execSync } = require('child_process');
-        const gitHash = execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim();
-        setBuildVersion(gitHash);
-      } catch (error) {
-        // If git command fails, use a fallback
-        setBuildVersion('dev');
-      }
+      // Fallback for development
+      setBuildVersion('dev');
     }
+  }, []);
+
+  // Initialize notification service and check for first-time usage
+  useEffect(() => {
+    const initApp = async () => {
+      try {
+        await notificationService.initialize();
+        
+        // Check if this is the first time using the app
+        const welcomeModalShown = localStorage.getItem('welcomeModalShown');
+        if (!welcomeModalShown) {
+          setShowWelcomeModal(true);
+        }
+      } catch (error) {
+        // Still check for first-time usage even if notifications fail
+        const welcomeModalShown = localStorage.getItem('welcomeModalShown');
+        if (!welcomeModalShown) {
+          setShowWelcomeModal(true);
+        }
+      }
+    };
+
+    initApp();
   }, []);
 
   // Save data to localStorage
@@ -78,6 +97,7 @@ function App() {
   return (
     <div className="container py-4">
       <h1 className="text-center mb-3">Spiritual Growth Tracker</h1>
+      
       <p className="text-center mb-4 text-muted">
         This app helps you track your daily spiritual growth by monitoring how well you are operating in the Fruits of the Spirit and identifying areas where you might be walking in the Works of the Flesh. Use it daily to reflect on your spiritual journey and make positive changes.
       </p>
@@ -140,6 +160,11 @@ function App() {
       <InstallPWAModal 
         show={showInstallModal}
         onHide={() => setShowInstallModal(false)}
+      />
+
+      <WelcomeModal 
+        show={showWelcomeModal}
+        onHide={() => setShowWelcomeModal(false)}
       />
 
       {/* Build Version Display */}

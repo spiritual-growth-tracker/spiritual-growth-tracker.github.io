@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { formatDate, parseDate, isToday } from '../utils/dateUtils';
 
 const DateNavigation = ({ selectedDate, onDateChange }) => {
@@ -6,9 +6,9 @@ const DateNavigation = ({ selectedDate, onDateChange }) => {
   const flatpickrInstance = useRef(null);
   const [useNativeInput, setUseNativeInput] = useState(false);
 
-  const handleDateChange = (selectedDates, dateStr) => {
+  const handleDateChange = useCallback((selectedDates, dateStr) => {
     onDateChange(dateStr);
-  };
+  }, [onDateChange]);
 
   const handlePrevDate = () => {
     const currentDate = parseDate(selectedDate);
@@ -56,7 +56,7 @@ const DateNavigation = ({ selectedDate, onDateChange }) => {
         flatpickrInstance.current = null;
       }
     };
-  }, []);
+  }, [handleDateChange]);
 
   useEffect(() => {
     if (flatpickrInstance.current && !useNativeInput) {
@@ -93,7 +93,7 @@ const DateNavigation = ({ selectedDate, onDateChange }) => {
             <input
               ref={inputRef}
               type="text"
-              className="form-control flatpickr-input"
+              className="form-control flatpickr-input text-center"
               value={selectedDate}
               readOnly
               placeholder="Select date"

@@ -1,10 +1,130 @@
-import React, { useRef, useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useRef, useState, useEffect } from 'react';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { formatDate } from '../utils/dateUtils';
+import notificationService from '../utils/notificationService';
 
 const SettingsModal = ({ show, onHide }) => {
   const fileInputRef = useRef(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [notificationSettings, setNotificationSettings] = useState({
+    enabled: false,
+    time: '20:00'
+  });
+  const [permission, setPermission] = useState('default');
+  const [isSupported, setIsSupported] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (show) {
+      loadNotificationSettings();
+      checkNotificationSupport();
+    }
+  }, [show]);
+
+  const checkNotificationSupport = () => {
+    const supported = 'Notification' in window;
+    setIsSupported(supported);
+    if (supported) {
+      setPermission(Notification.permission);
+    }
+  };
+
+  const loadNotificationSettings = () => {
+    const savedSettings = notificationService.getNotificationSettings();
+    setNotificationSettings(savedSettings);
+  };
+
+  const handlePermissionRequest = async () => {
+    setIsLoading(true);
+    setMessage('');
+
+    try {
+      const granted = await notificationService.requestPermission();
+      setPermission(Notification.permission);
+      
+      if (granted) {
+        setMessage('Notification permission granted! You can now enable daily reminders.');
+      } else {
+        setMessage('Notification permission denied. Please enable notifications in your browser settings.');
+      }
+    } catch (error) {
+      setMessage('Failed to request notification permission: ' + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleToggleNotifications = async () => {
+    if (!notificationSettings.enabled && permission !== 'granted') {
+      setMessage('Please grant notification permission first.');
+      return;
+    }
+
+    const newSettings = {
+      ...notificationSettings,
+      enabled: !notificationSettings.enabled
+    };
+
+    setNotificationSettings(newSettings);
+    notificationService.updateNotificationSettings(newSettings.enabled, newSettings.time);
+    
+    if (newSettings.enabled) {
+      setMessage('Daily reminders enabled! You will receive a notification at ' + newSettings.time);
+    } else {
+      setMessage('Daily reminders disabled.');
+    }
+  };
+
+  const handleTimeChange = (e) => {
+    const newTime = e.target.value;
+    const newSettings = { ...notificationSettings, time: newTime };
+    setNotificationSettings(newSettings);
+    
+    if (newSettings.enabled) {
+      notificationService.updateNotificationSettings(true, newTime);
+      setMessage('Reminder time updated to ' + newTime);
+    }
+  };
+
+  const handleTestNotification = async () => {
+    setIsLoading(true);
+    setMessage('');
+
+    try {
+      await notificationService.sendNotification('Test Notification', {
+        body: 'This is a test notification from your Spiritual Growth Tracker app!',
+        tag: 'test-notification'
+      });
+      setMessage('Test notification sent! Check your notifications.');
+    } catch (error) {
+      setMessage('Failed to send test notification: ' + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getPermissionStatusText = () => {
+    switch (permission) {
+      case 'granted':
+        return 'Notifications are enabled';
+      case 'denied':
+        return 'Notifications are blocked';
+      default:
+        return 'Notification permission not set';
+    }
+  };
+
+  const getPermissionStatusColor = () => {
+    switch (permission) {
+      case 'granted':
+        return 'success';
+      case 'denied':
+        return 'danger';
+      default:
+        return 'warning';
+    }
+  };
 
   const clearAllData = () => {
     const keysToRemove = [];
@@ -97,13 +217,97 @@ const SettingsModal = ({ show, onHide }) => {
 
   return (
     <>
-      <Modal show={show} onHide={onHide}>
+      <Modal show={show} onHide={onHide} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Settings</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="mb-3">
-            <h6>Data Management</h6>
+          {/* Notifications Section */}
+          <div className="mb-4">
+            <h6>
+              <i className="bi bi-bell-fill me-2"></i>
+              Notifications
+            </h6>
+            <p className="text-muted">Set up daily reminders for your spiritual inventory</p>
+            
+            {!isSupported && (
+              <Alert variant="warning">
+                <i className="bi bi-exclamation-triangle me-2"></i>
+                Notifications are not supported in this browser.
+              </Alert>
+            )}
+
+            {isSupported && (
+              <>
+                <div className="mb-3">
+                  <Alert variant={getPermissionStatusColor()}>
+                    <i className="bi bi-info-circle me-2"></i>
+                    {getPermissionStatusText()}
+                  </Alert>
+                  
+                  {permission !== 'granted' && (
+                    <Button 
+                      variant="primary" 
+                      onClick={handlePermissionRequest}
+                      disabled={isLoading}
+                      size="sm"
+                      className="mb-3"
+                    >
+                      {isLoading ? 'Requesting...' : 'Request Permission'}
+                    </Button>
+                  )}
+                </div>
+
+                <Form className="mb-3">
+                  <Form.Group className="mb-3">
+                    <Form.Check
+                      type="switch"
+                      id="notification-switch"
+                      label="Enable daily reminders"
+                      checked={notificationSettings.enabled}
+                      onChange={handleToggleNotifications}
+                      disabled={permission !== 'granted'}
+                    />
+                  </Form.Group>
+
+                  {notificationSettings.enabled && (
+                    <Form.Group className="mb-3">
+                      <Form.Label>Reminder Time</Form.Label>
+                      <Form.Control
+                        type="time"
+                        value={notificationSettings.time}
+                        onChange={handleTimeChange}
+                        disabled={!notificationSettings.enabled}
+                        className="w-auto"
+                      />
+                      <Form.Text className="text-muted">
+                        You&apos;ll receive a daily reminder at this time to complete your spiritual inventory.
+                      </Form.Text>
+                    </Form.Group>
+                  )}
+                </Form>
+
+                <div className="mb-3">
+                  <Button 
+                    variant="outline-primary" 
+                    onClick={handleTestNotification}
+                    disabled={permission !== 'granted' || isLoading}
+                    size="sm"
+                  >
+                    <i className="bi bi-bell me-2"></i>
+                    Send Test Notification
+                  </Button>
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Data Management Section */}
+          <div className="mb-4">
+            <h6>
+              <i className="bi bi-database me-2"></i>
+              Data Management
+            </h6>
             <p className="text-muted">Manage your spiritual growth data</p>
             <div className="d-grid gap-2">
               <Button variant="info" onClick={exportData}>
@@ -128,13 +332,23 @@ const SettingsModal = ({ show, onHide }) => {
             />
           </div>
           
+          {/* About Section */}
           <div className="mb-3">
-            <h6>About</h6>
+            <h6>
+              <i className="bi bi-info-circle me-2"></i>
+              About
+            </h6>
             <p className="text-muted">
               Spiritual Growth Tracker v1.0.0<br />
               A tool to help you track your daily spiritual growth by monitoring the Fruits of the Spirit and Works of the Flesh.
             </p>
           </div>
+
+          {message && (
+            <Alert variant="info" dismissible onClose={() => setMessage('')}>
+              {message}
+            </Alert>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
