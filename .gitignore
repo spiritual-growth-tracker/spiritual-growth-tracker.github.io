@@ -29,5 +29,5 @@ yarn-error.log*
 ehthumbs.db
 Thumbs.db
 
-# Ensure assets/images/icons are tracked
-!assets/images/icons/ 
+# Ensure src/assets/images/favicons are tracked
+!src/assets/images/favicons/ 

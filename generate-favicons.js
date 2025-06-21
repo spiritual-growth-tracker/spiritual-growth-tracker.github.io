@@ -4,11 +4,11 @@ const sharp = require('sharp');
 const pngToIco = require('png-to-ico');
 
 // Path to the existing SVG icon
-const iconsDir = path.join(__dirname, 'assets', 'images', 'favicons');
+const iconsDir = path.join(__dirname, 'src', 'assets', 'images', 'favicons');
 const svgPath = path.join(iconsDir, 'icon.svg');
 
 if (!fs.existsSync(svgPath)) {
-  console.error('icon.svg not found in assets/images/favicons/. Please add your SVG icon first.');
+  console.error('icon.svg not found in src/assets/images/favicons/. Please add your SVG icon first.');
   process.exit(1);
 }
 
@@ -40,7 +40,8 @@ async function generateIcons() {
       .png()
       .toFile(path.join(iconsDir, 'apple-touch-icon.png'));
 
-    console.log('Icon files generated successfully!');
+    // No output to build directory at all
+    console.log('Icon files generated successfully in src/assets/images/favicons!');
   } catch (error) {
     console.error('Error generating icons:', error);
     process.exit(1);

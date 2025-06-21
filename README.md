@@ -32,7 +32,7 @@ A React-based Progressive Web Application to track your daily spiritual growth b
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/spiritual-growth-tracker.github.io.git
+git clone https://github.com/spiritual-growth-tracker/spiritual-growth-tracker.github.io.git
 cd spiritual-growth-tracker.github.io
 ```
 

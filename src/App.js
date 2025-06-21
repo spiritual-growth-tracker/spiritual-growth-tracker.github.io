@@ -17,6 +17,7 @@ function App() {
   const [showResultsModal, setShowResultsModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
+  const [buildVersion, setBuildVersion] = useState('');
 
   // Load data for the selected date
   useEffect(() => {
@@ -27,6 +28,25 @@ function App() {
       setData({ fruits: [], flesh: [] });
     }
   }, [selectedDate]);
+
+  // Get build version from environment variable or git
+  useEffect(() => {
+    // Check if we have a build version from environment (set during build)
+    const envVersion = process.env.REACT_APP_BUILD_VERSION;
+    if (envVersion) {
+      setBuildVersion(envVersion);
+    } else {
+      // Fallback: try to get git commit hash
+      try {
+        const { execSync } = require('child_process');
+        const gitHash = execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim();
+        setBuildVersion(gitHash);
+      } catch (error) {
+        // If git command fails, use a fallback
+        setBuildVersion('dev');
+      }
+    }
+  }, []);
 
   // Save data to localStorage
   const saveData = (newData) => {
@@ -121,6 +141,13 @@ function App() {
         show={showInstallModal}
         onHide={() => setShowInstallModal(false)}
       />
+
+      {/* Build Version Display */}
+      {buildVersion && (
+        <div className="text-center mt-5 pt-3 border-top">
+          <small className="text-muted">Build: {buildVersion}</small>
+        </div>
+      )}
     </div>
   );
 }
