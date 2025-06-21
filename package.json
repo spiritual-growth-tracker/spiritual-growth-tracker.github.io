@@ -42,7 +42,9 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "git-rev-sync": "^3.0.2",
+    "png-to-ico": "^2.1.8",
     "postcss": "^8.4.24",
+    "sharp": "^0.34.2",
     "terser-webpack-plugin": "^5.3.7"
   },
   "browserslist": {

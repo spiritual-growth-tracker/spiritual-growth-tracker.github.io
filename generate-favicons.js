@@ -4,11 +4,11 @@ const sharp = require('sharp');
 const pngToIco = require('png-to-ico');
 
 // Path to the existing SVG icon
-const iconsDir = path.join(__dirname, 'assets', 'images', 'icons');
+const iconsDir = path.join(__dirname, 'assets', 'images', 'favicons');
 const svgPath = path.join(iconsDir, 'icon.svg');
 
 if (!fs.existsSync(svgPath)) {
-  console.error('icon.svg not found in assets/images/icons/. Please add your SVG icon first.');
+  console.error('icon.svg not found in assets/images/favicons/. Please add your SVG icon first.');
   process.exit(1);
 }
 
